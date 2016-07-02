@@ -34,35 +34,39 @@ Hakurei Shop 羽天珼岸購買系統
 	  </div>
   </div>
 </div>
-
-<h4 class="ui horizontal divider header">
-請填寫合併單號
-</h4>
-<div class="field">
-	<input name="combine" placeholder="合併單號(如為單一購買/以及首樣購買產品無需理會)" type="text">
-</div>
-<h4 class="ui horizontal divider header">
-請填寫您的聯絡資訊
-</h4>
-<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-<input type="hidden" name="item" value="{{ item['_id']|string }}" />
-<input type="hidden" name="many" value="{{ many }}" />
+	{% if request.cookies.get('bid') == None%}
+<input type="hidden" name="combine" value="" />
 <h4 class="ui horizontal divider header">
 購買操作
 </h4>
-
+	{%else%}
+<h4 class="ui horizontal divider header">
+合併單號（免手動填寫）
+</h4>
+	<input name="combine" type="hidden" value="{{request.cookies.get('bid')}}">
+	<input class="ui input disabled"name="combine" placeholder="合併單號" disabled type="text" value="{{request.cookies.get('bid')}}">
+<h4 class="ui horizontal divider header">
+購買操作
+</h4>
+{%endif%}
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+<input type="hidden" name="item" value="{{ item['_id']|string }}" />
+<input type="hidden" name="many" value="{{ many }}" />
 <div class="ui icon large message">
 	<i class="ui huge icons " style="padding-right:20px;"><i class="large cart grey icon"></i></i>
 		<div class="content">
 			<div class="header">		
 				本系統採用無會員機制購買系統
 			</div>
-			<br/>1.確定購買此商品請點擊"加入購物"，系統會給您一組暫存單號。
-			<br/>2.您可以直接利用此組單號進行結帳，或是透過"填寫合併單號"，將訂單合併。
-			<br/>3.等待確認所有物品皆已經加入完成，可透過首頁頂部的"訂單付款"進行結帳。
+			<br/>1.確定購買此商品請點擊"加入購物"，系統將會自動產生一組單號。
+			<br/>2.如果要繼續選購請在下一頁點選"繼續購物"，無需填寫個人資料。
+			<br/>3.等待所有物品皆已經加入完成，可透過首頁的"訂單查看/付款"，檢查並且付款。
+			<br/>4.如要清空購物清單，請點擊"清除購物清單"。
 			</p>
 		<div class ="ui divider"></div>
 			<div  class="ui right floated buttons">
+<button class="ui red button" type="submit" formaction="/delbidc" formmethod="get">清除購物清單
+</button> 
 <button class="ui green button" type="submit" formaction="/keepbuy" formmethod="post">加入購物
 </button> 
 			</div>

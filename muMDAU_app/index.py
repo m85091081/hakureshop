@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # muMDAU_app main / first page 
 from muMDAU_app import app, socketio
-from flask import request, render_template, Blueprint, url_for, redirect, session
+from flask import make_response, request, render_template, Blueprint, url_for, redirect, session
 import dbmongo, hashlib
 from dbmongo import User, Data, Bid , Item
 import subprocess, os
@@ -24,6 +24,12 @@ def buyit(itmid):
     else:
         return 'Fuck U NO GG'
 
+@main.route('/delbidc')
+def delbidc():
+    response = make_response(redirect(url_for('main.index')))
+    response.set_cookie('bid','',expires=0)
+    return response
+
 @main.route('/keepbuy',methods=['POST'])
 def keepbuy():
     item = request.form['item']
@@ -35,13 +41,17 @@ def keepbuy():
             itm = {item:many}
             bid = Data.sent(itm)
             fitem = Data.find_item(bid)
-            return render_template('result.html',**locals())
+            response = make_response(render_template('result.html',**locals()))
+            response.set_cookie('bid',bid)
+            return response
         else:
             if Data.find_item(combine) == None:
                 itm = {item:many}
                 bid = Data.sent(itm)
                 fitem = Data.find_item(bid)
-                return render_template('result.html',**locals())
+                response = make_response(render_template('result.html',**locals()))
+                response.set_cookie('bid',bid)
+                return response
             else:
                 itm = Data.find_item(combine)
                 if not itm.get(item) == None :
@@ -50,13 +60,17 @@ def keepbuy():
                     itm.update(itm2)
                     bid = Data.update(combine,itm)                
                     fitem = Data.find_item(bid)
-                    return render_template('result.html',**locals())
+                    response = make_response(render_template('result.html',**locals()))
+                    response.set_cookie('bid',bid)
+                    return response
                 else:
                     itm2 = {item:many}
                     itm.update(itm2)
                     bid = Data.update(combine,itm)                
                     fitem = Data.find_item(bid)
-                    return render_template('result.html',**locals())
+                    response = make_response(render_template('result.html',**locals()))
+                    response.set_cookie('bid',bid)
+                    return response
 
 
 @main.route('/find', methods=['GET', 'POST'])

@@ -10,6 +10,9 @@ Hakurei Shop 羽天珼岸購買系統
 <div class="ui icon small message" style="padding-top:6px; padding-bottom:6px;">
 	<i class="ui tiny icons " style="padding-right:20px;"><i class="tiny payment grey icon"></i></i>
 		<div class="content">
+	{% if not request.cookies.get('bid') == None%}
+			<button class="ui right floated tiny red button" onclick="location.href='/delbidc'">清除購物清單</button>
+	{%endif%}
 			<button class="ui right floated tiny blue button" onclick="location.href='/find'">訂單查詢/付款</button>
 		</div>
 	</div>

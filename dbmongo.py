@@ -82,7 +82,7 @@ class Data:
                 "bid": bid ,
                 "date": datetime.datetime.now(),
                 "item" : item,
-                "genabid": int(Bid.find_one(bid,"genabid")),
+                "genabid": int(Data.find_one(bid,"genabid")),
                 "show" : True,
                 "bill" : False
                 }
