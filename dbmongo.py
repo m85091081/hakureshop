@@ -45,7 +45,7 @@ class Item:
         data = db['Item']
         dfind = data.find_one({"_id":ObjectId(itmid)}).get("count")
         print(dfind)
-        data.update_one({"bid":ObjectId(itmid)},{"$set": {"count":int(dfind)-int(inp)}})
+        data.update_one({"_id":ObjectId(itmid)},{"$set": {"count":int(dfind)-int(inp)}})
         return 0
 
 
