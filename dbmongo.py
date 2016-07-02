@@ -108,7 +108,7 @@ class Data:
         data = db['buyData']
         item = data.find_one({"bid":str(bid)}).get('item')
         for x in item:
-            Data.countmin(x,item[x])
+            Item.countmin(x,item[x])
         data.update_one({"bid": str(bid)},{"$set": {"bill": True}})
         return 0
 
