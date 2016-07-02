@@ -13,7 +13,12 @@ Hakurei Shop 羽天珼岸購買系統
 		<div class="ui label">
 			訂單編號
 		</div>
+	{% if not request.cookies.get('bid') == None %}
+		<input placeholder="訂單編號" type="text" value={{request.cookies.get('bid')}} name="bid">
+		{%else%}
 		<input placeholder="訂單編號" type="text" name="bid">
+		{%endif%}
+
 	</div>
 	<div class="ui divider"></div>
 	<div align='right'>
