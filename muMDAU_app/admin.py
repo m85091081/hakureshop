@@ -14,9 +14,7 @@ thread = None
 def index():
     if request.method == 'GET':
         if 'otpusername' in session and 'username' in session:
-            pre = Bid.prefind()
-            rpre = Bid.prefind()
-            bill = Bid.bidfind()
+            data = Bid.bidfind()
             return render_template('admin/adm.html',**locals())
         elif 'otpusername' not in session and 'username'  in session:
             return redirect(url_for("login.ologin"))
@@ -33,8 +31,6 @@ def index():
         if not name == "" and not artist == "" and not des == "" and not count == "" and not tag == "" and not pic == "" and not cost == "":
             Item.new(name,artist,des,count,tag,cost,pic)
             return redirect(url_for("main.index"))
-
-
 
 
 @admin.route('/dbid/<bid>', methods=['GET', 'POST'])

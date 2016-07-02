@@ -76,6 +76,7 @@ class Data:
         except Exception as e:
             durl = None
         return durl
+    
     def update(bid,item):
         data = db['buyData']
         rsent = { 
@@ -89,10 +90,6 @@ class Data:
         data.update_one({"bid":bid},{"$set": rsent} ,upsert=True)
         return bid
 
-    def find():
-        data = db['Data']
-        dfind = data.find()
-        return dfind
     def find_one(bid,something):
         data = db['buyData']
         dfind = data.find_one({"bid":str(bid)})
@@ -101,21 +98,15 @@ class Data:
         except Exception as e:
             durl = None
         return durl
-    def delete(bid):
-        data = db['Data']
-        dfind = data.delete_one({"bid":str(bid)})
+    
+    def modbill(bid):
+        data = db['buyData']
+        data.update_one({"bid": str(bid)},{"$set": {"bill": True}})
         return 0
-    def modshow(bid):
-        data = db['Data']
-        data.update_one({"bid": str(bid)},{"$set": {"show": False}})
-        return 0
+
     def modgenabid(bid):
         data = db['buyData']
         data.update_one({"bid": str(bid)},{"$set": {"genabid": Data.find_one(bid,'genabid') + 1}})
-        return 0
-    def modstat(bid,stat):
-        data = db['Data']
-        data.update_one({"bid": str(bid)},{"$set": {"status": str(stat)}})
         return 0
 
 class Bid:
@@ -135,46 +126,21 @@ class Bid:
         rid = data.update_one({"bid":bid},{"$set": rsent} ,upsert=True).upserted_id
         return bid
 
-    def prefind():
-        data = db['preData']
-        dfind = data.find()
-        return dfind
-    
     def bidfind():
         data = db['bidData']
         dfind = data.find()
         return dfind
-
-    def presave(bid, bidmoney, name, email, url, texta, dic):
-        data = db['preData']
-        data.create_index("bid", unique=True)
-        rsent = { 
-                "bid": bid,
-                "bidmoney": bidmoney,
-                "date": datetime.datetime.utcnow(),
-                "name": name,
-                "email": email,
-                "url" : url,
-                "texta" : texta,
-                "dic" : dic
-                }
-
-        rid = data.update_one({"bid":bid},{"$set": rsent} ,upsert=True).upserted_id
-        return bid
     
-    def finddict(bid):
-        data = db['preData']
-        dfind = data.find_one({"bid":bid})
-        durl = dfind.get('dic')
-        return durl
+    def modbill(bid):
+        data = db['bidData']
+        data.update_one({"bid": str(bid)},{"$set": {"bidornot": True}})
+        return 0
 
     def findmoney(bid):
-        data = db['preData']
+        data = db['bidData']
         dfind = data.find_one({"bid":bid})
-        durl = dfind.get('bidmoney')
+        durl = dfind.get('bill')
         return durl
-    
-
 
     
 class User:

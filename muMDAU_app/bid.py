@@ -14,17 +14,10 @@ def server():
             MerchantTradeNo = request.form['MerchantTradeNo']
             RtnCode = request.form['RtnCode']
             SimulatePaid = request.form['SimulatePaid']
-            print(SimulatePaid)
             if not int(SimulatePaid) == 1 :
-                print(MerchantTradeNo[0:16])
-                Data.modstat(str(MerchantTradeNo[0:16]),'bill')
-                name = Data.find_one(str(MerchantTradeNo[0:16]),'name')
-                email = Data.find_one(str(MerchantTradeNo[0:16]),'email')
-                if int(request.form['TradeAmt']) < int(Bid.findmoney( str(MerchantTradeNo[0:16]))):
-                    bim = 'thirty'
-                else:
-                    bim = 'full'
-                #Bid.bidadd(str(MerchantTradeNo[0:16]),request.form['TradeAmt'],name,email, bim )
+                if int(request.form['TradeAmt']) == int(Bid.findmoney( str(MerchantTradeNo[0:16]))):
+                    Data.modbill(str(MerchantTradeNo[0:16]))
+                    Bid.modbill(str(MerchantTradeNo[0:16]))
                 return '1|OK'
             else:
                 print('simi!')

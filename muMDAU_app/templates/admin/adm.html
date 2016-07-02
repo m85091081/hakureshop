@@ -1,5 +1,5 @@
 {% extends "base/2row-base.html" %} 
-	<h3>請留言您的訂單編號，已經訂購名字。</h3>
+<h3>請留言您的訂單編號，已經訂購名字。</h3>
 
 {% block naviIndexClass %}active{% endblock %}
 
@@ -43,7 +43,36 @@
 		  </form>
 		  </div>
 		  <div class="ui divider"></div>
-
+	  	  <a class="ui left black ribbon label">
+		  販售清單
+	  	  </a>
+		  <table class="ui celled table">
+			  <thead>
+				  <tr>
+					  <th>Bid</th>
+					  <th>時間</th>
+					  <th>誰要買</th>
+				  	  <th>電郵呢</th>
+				  	  <th>電話呢</th>
+				  	  <th>付錢</th>
+				  	  <th>系統操作</th>
+		  		  </tr>
+			  </thead>
+			  <tbody>
+		  {%for x in data%}
+          <tr>
+              <td>{{x.get('bid')}}</td>
+              <td>{{x.get('date').strftime("%m-%d %H:%M")}}</td>
+              <td>{{x.get('name')}}</td>
+              <td>{{x.get('email')}}</td>
+              <td>{{x.get('tele')}}</td>
+              <td>{{x.get('bidornot')|string}}</td>
+              <td></td>
+          </tr>
+		  {% endfor %}
+			  </tbody>
+          </table>
+		  <div class="ui divider"></div>
 <script>
 $( document ).ready(function() {
 var foo = $('.poptrox');
