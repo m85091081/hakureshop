@@ -1,6 +1,6 @@
 from muMDAU_app import app, socketio, csrf
 from muMDAU_app.pyallpay import AllPay
-from flask import request, render_template, Blueprint
+from flask import make_response, request, render_template, Blueprint
 from dbmongo import User, Data, Bid ,Item
 import datetime
 bid = Blueprint('bid', __name__)
