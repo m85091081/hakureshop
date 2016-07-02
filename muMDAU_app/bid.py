@@ -35,7 +35,7 @@ def allfuck(bid):
     else:
         merchant_trade_no = bid + str(Data.find_one(bid,'genabid'))
         fitem = Data.find_item(bid)
-        money = 0
+        money = 80
         for f in fitem :
             money = money + int(Item.finddata(f).get('cost')) * int(fitem[f])
         Data.modgenabid(bid)

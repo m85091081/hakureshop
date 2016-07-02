@@ -41,6 +41,11 @@ class Item:
         data = db['Item']
         dfind = data.find_one({"_id":ObjectId(itmid)})
         return dfind
+    def countmin(itmid,inp):
+        data = db['Item']
+        dfind = data.find_one({"_id":ObjectId(itmid)}).get("count")
+        data.update_one({"bid":ObjectId(itmid)},{"$set": {"count":int(dfind)-int(inp)}})
+        return 0
 
 
 class Data:
@@ -101,6 +106,9 @@ class Data:
     
     def modbill(bid):
         data = db['buyData']
+        item = data.find_one({"bid":str(bid)}).get('item')
+        for x in item:
+            Data.countmin(x,item[x])
         data.update_one({"bid": str(bid)},{"$set": {"bill": True}})
         return 0
 
