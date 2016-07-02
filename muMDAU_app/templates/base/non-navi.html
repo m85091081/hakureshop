@@ -1,0 +1,18 @@
+{% extends "base/base.html" %} 
+
+{% block mainBlock %}
+<div class="ui container" id="MainFrame">
+	<div class="ui pointing menu" id="navibar">
+			<a href="/" class="header item">
+				<!--img class="logo" src=""-->
+				DIY 下單系統
+			</a>
+			<a class="right item {% block naviwantClass %}{%endblock%}" href="/">開始下單</a>
+			<a class="item {% block  navimoneyClass %}{%endblock%}" href="/find">查詢訂單</a>
+	</div>
+<div class="ui grey segment" id="seg01">
+{% block mainFrame %}{% endblock %}
+<div class="ui divider"></div>
+		<p id="copyright">超炫炮下單系統 | 0mu 版權所有 </p>
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "panel.html"%}
+{% block text %}
+
+<a class="ui green right ribbon label">0MuCMS | Admin-Panel</a>
+<div class="ui secondary pointing menu">
+						 <a class="item active" data-tab="list">
+							 預訂參加清單
+						 </a>
+						 <a class="item" data-tab="editor">
+							 編輯器
+						 </a>
+					 </div>
+					<div class="ui tab active" data-tab="list">
+			<form id="bck" class="createtable" method="post" action="/event/add">
+						<div class="ui grid">
+			<div class="twelve wide column">
+			<div class="ui right labeled fluid input">
+				<input class="form-control" type="text" name="name"  placeholder="ex:FF28"><br>
+				<a class="ui tag label" id="basic-addon3">場次名稱</a>
+			</div></br>
+			<div class="ui right labeled fluid input">
+				<input class="form-control" type="text" name="date" placeholder="2016.6.7-6.8"><br>
+				<a class="ui tag label" id="basic-addon3">日期</a>
+			</div>
+			</div>
+
+			<div class="four wide column">
+			<div class="ui right floated  buttons">
+			  	<button id="login" type="submit" class="ui positive button">提交</button>
+			</div>  
+			</div>
+			</div>
+		</form>		
+		<div class="ui divider"></div>
+					 	 <table class="ui definition celled right aligned table">
+							 <thead>
+							 <tr>
+		 						 <th>場次</th>
+		 						 <th>日期</th>		
+								 <th>刪除</th>	
+							 </tr>
+							 {% for x in elist %}
+							 <tr>
+								 <td>{{x[0]}}</td>
+								 <td>{{x[1]}}</td>
+								 <td><input type ="button" onclick="javascript:location.href='/event/del/{{x[0]}}'" value="刪除"></input></td>
+							 </tr>
+							 {% endfor %}
+							 </thead>
+							 <tbody>
+							 </tbody>
+				 			 </table>
+					</div>
+					<div class="ui tab" data-tab="editor">
+						{% include "editor.html" %}
+					</div>
+
+{% endblock %}

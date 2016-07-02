@@ -1,0 +1,75 @@
+{% extends "nshopbase.html"%}
+{% block title %}Shop{% endblock %}
+{% block card %}
+active
+{% endblock %}
+{% block text %}
+<h3 class="ui horizontal divider header">
+Hakurei Shop 羽天珼岸購買系統
+</h3>
+<form class="ui form">
+<h4 class="ui horizontal divider header">
+以下是您這次購買的商品
+</h4>
+<form class="ui form">
+
+<div class="ui divided items">
+  <div class="item">
+	  <div class="image">
+		  <img src="{{item['img']}}">
+	  </div>
+	  <div class="content">
+		  <a class="header">{{item['name']}}</a>
+		  <div class="meta">
+			  <span class="artist">畫師:{{item['artist']}}</span>
+		  </div>
+		  <div class="description">
+			  <p>描述:{{item['des']}}</p>
+			  <p>購買數量:{{many}}</p>
+			  <p>價格:{{item['cost']|int*many|int}}</p>
+		  </div>
+		  <div class="extra">
+			  <div class="ui label">{{item['tag']}}</div>
+		  </div>
+	  </div>
+  </div>
+</div>
+
+<h4 class="ui horizontal divider header">
+請填寫合併單號
+</h4>
+<div class="field">
+	<input name="combine" placeholder="合併單號(如為單一購買/以及首樣購買產品無需理會)" type="text">
+</div>
+<h4 class="ui horizontal divider header">
+請填寫您的聯絡資訊
+</h4>
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+<input type="hidden" name="item" value="{{ item['_id']|string }}" />
+<input type="hidden" name="many" value="{{ many }}" />
+<h4 class="ui horizontal divider header">
+購買操作
+</h4>
+
+<div class="ui icon large message">
+	<i class="ui huge icons " style="padding-right:20px;"><i class="large cart grey icon"></i></i>
+		<div class="content">
+			<div class="header">		
+				本系統採用無會員機制購買系統
+			</div>
+			<br/>1.確定購買此商品請點擊"加入購物"，系統會給您一組暫存單號。
+			<br/>2.您可以直接利用此組單號進行結帳，或是透過"填寫合併單號"，將訂單合併。
+			<br/>3.等待確認所有物品皆已經加入完成，可透過首頁頂部的"訂單付款"進行結帳。
+			</p>
+		<div class ="ui divider"></div>
+			<div  class="ui right floated buttons">
+<button class="ui green button" type="submit" formaction="/keepbuy" formmethod="post">加入購物
+</button> 
+			</div>
+		</div>
+	</div>
+	</div>
+</form>
+{% endblock %}
+{% block script %}
+{% endblock %}

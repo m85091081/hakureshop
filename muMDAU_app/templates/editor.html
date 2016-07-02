@@ -1,0 +1,83 @@
+		<br />
+		<form id="form" class="createtable">
+		<div>
+			<div class="ui fluid input">
+			<input class="form-control" name="title" type="text" required onkeyup="value=value.replace(/[\一-\龥]|\s|\b/g,'') " placeholder="標題 *格式 不可中文 不可空白" id = "fc-inp">
+			</div>
+			</br>
+		<textarea id="markdown" class="content" name="content">
+---
+layout: post
+title:  "" 
+date: +0800
+post_author:
+---
+<!--
+	請依照以下格式填寫上面的發文標注
+	layout: post
+	title:  "你要的標題"
+	date:   20xx-xx-xx xx:xx:xx +0800
+	post_author: 作者
+-->
+<!-- 內文  -->
+		</textarea> 
+		 <input type="hidden" name="password" id="password" value="">
+		  <input type="hidden" name="username" id="username" value="">
+		</div>
+		</form>
+		<div class="ui divider"></div>
+		<div class="ui grid">
+			<div class="thirteen wide column">
+				<form name="imgurup" action="" method="POST" enctype="multipart/form-data"> 
+					<input name="fileToUpload" type="file" id="fileToUpload">
+				</form>
+			</div>
+			<div class="three wide column">
+					<button id="uploadfile" class="ui positive button">	
+					點此上傳圖片</button>
+			</div>
+		</div>
+		  <div class="ui divider"></div>	
+		<div class="ui grid">
+			<div class="thirteen wide column">
+			</div>
+			<div class="three wide column">
+				<div class="ui fluid buttons">
+					  <button  type="submit" id="save" class="ui positive button">快速發佈</button>
+				</div>
+			</div>
+		</div>
+			<div class="ui divider"></div>
+					 <div class="ui secondary pointing menu">
+						 <a class="item active" data-tab="posts">
+							 已經發佈
+						 </a>
+					 </div>
+					<div class="ui tab active" data-tab="posts">
+					 	 <table id="marktitle" class="ui definition celled right aligned table">
+							 <thead>
+							 <tr>
+		 						 <th>佇列</th>
+		 						 <th>檔案名稱</th>		
+								 <th>刪除文章</th>	
+							 </tr>
+							 </thead>
+							 <tbody>
+							 </tbody>
+				 			 </table>
+					</div>
+					<div class="ui tab" data-tab="posted">
+						<table id="markedtitle" class="ui definition celled right aligned table">
+							<thead>
+								<tr>
+									<th>佇列</th>
+									<th>檔案名稱</th>	
+									<th>刪除文章</th>	
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+			</div>
+			</br>

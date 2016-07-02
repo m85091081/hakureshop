@@ -1,0 +1,35 @@
+{% extends "base/non-navi.html" %} 
+
+{% block title %}KPC - 超炫炮阿母斯特郎加農炮POS系統{% endblock %}
+<!--
+{% block sideFrame %}
+		<a class="active item">效能監控</a>
+		<a class="item">流量監控</a>
+{% endblock %}
+-->
+{% block mainFrame %}
+	<form class="ui form" action="/find" method="post">
+		    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+		  <div class="sixteen wide  aligned column">
+			  <a class="ui left black ribbon label">
+				  查詢下單
+		  	  </a>
+			  <div class="ui middle aligned very relaxed stackable grid" style="padding: 15px 0px 15px 0px">
+		  		  <div class="sixteen wide column" style="padding:14px 35px 0px 35px">
+					  <div class="ui  fluid big labeled input">
+					  	  <div class="ui label">
+						   	  訂單編號
+		  				  </div>
+		  				  <input placeholder="訂單編號" type="text" name="bid">
+					  </div>
+				  </div>
+	  		  <div class="sixteen wide column" style="padding:0px 35px 0px 35px">
+			  <div class="ui divider"></div>
+			  <div align='right'>
+		  		  <button class="ui massive red button" type="submit">查詢訂單</button>
+			  </div>
+			  </div>
+			  </div>
+		  </form>
+{% endblock %}
+

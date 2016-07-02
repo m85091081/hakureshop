@@ -1,0 +1,151 @@
+{% extends "base/2row-base.html" %} 
+	<h3>請留言您的訂單編號，已經訂購名字。</h3>
+
+{% block naviIndexClass %}active{% endblock %}
+
+{% block title %}HakureiWing 訂購後臺 {% endblock %}
+{% block mainFrame %}
+<div class="sixteen wide  aligned column">
+	  	  <a class="ui left black ribbon label">
+		  新增販賣項目
+	  	  </a>
+		  <div style="padding-top:15px;">
+			<form class="ui form" method='POST' action='/admin/'>
+		    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+			  <div class="field">
+				  <div class="two fields">
+					  <div class="field">
+						  <input name="name" placeholder="商品名字" type="text">
+					  </div>
+					  <div class="field">
+						  <input name="artist" placeholder="填寫繪師" type="text">
+					  </div>
+				  </div>
+				  <div class="four fields">
+					  <div class="field">
+						  <input name="des" placeholder="產品敘述" type="text">
+					  </div>
+					  <div class="field">
+						  <input name="count" placeholder="產品數量" type="text">
+					  </div>
+					  <div class="field">
+						  <input name="tag" placeholder="Tag" type="text">
+					  </div>
+					  <div class="field">
+						  <input name="cost" placeholder="價格" type="text">
+					  </div>
+				  </div>
+				  <div class="field">
+					  <input name="pic" placeholder="圖片位置" type="text">
+				  </div>
+			  </div>
+			  <button class="ui button" type="submit">Submit</div>
+		  </form>
+		  </div>
+		  <div class="ui divider"></div>
+	  	  <a class="ui left black ribbon label">
+		  暫存確認訂單
+	  	  </a>
+		  <table class="ui celled table">
+			  <thead>
+				  <tr>
+					  <th>Bid</th>
+					  <th>時間</th>
+					  <th>誰要買</th>
+				  	  <th>電郵</th>
+				  	  <th>系統動作</th>
+		  		  </tr>
+			  </thead>
+			  <tbody class="poptrox">
+				  {% for pr in pre:%}
+				  {% if "pre" in getdata(pr.get('bid'),'status')%}
+				  <tr class="positive">
+						  <td>{{pr.get('bid')}}</td>
+						  <td>{{pr.get('date').strftime("%m-%d %H:%M")}}</td>
+					  <td>{{pr.get('name')}}</td>
+					  <td>{{pr.get('email')}}</td>
+					  <td>
+						  <form >
+						  <button class="ui red circular mini button" type="submit" formaction="/admin/dbid/{{pr.get('bid')}}" formmethod="get">X</button>
+						  <button class="ui green circular mini button" type="submit" formaction="/admin/check/publish/{{pr.get('bid')}}" formmethod="get">O</button>
+					  </td>
+				  </tr>
+				  {% endif %}
+				  {% endfor %}
+
+			  </tbody>
+		  </table>
+		  <div class="ui divider"></div>
+	  	  <a class="ui left black ribbon label">
+		  尚未付款訂單
+	  	  </a>
+		  <table class="ui celled table">
+			  <thead>
+				  <tr>
+					  <th>Bid</th>
+					  <th>時間</th>
+					  <th>誰要買</th>
+				  	  <th>電郵</th>
+				  	  <th>系統動作</th>
+		  		  </tr>
+			  </thead>
+			  <tbody class="poptrox">
+				  {% for rx in rpre:%}
+				  {% if 'nbid' in getdata(rx.get('bid'),'status')%}
+				  <tr class="positive">
+						  <td>{{rx.get('bid')}}</td>
+						  <td>{{rx.get('date').strftime("%m-%d %H:%M")}}</td>
+					  <td>{{rx.get('name')}}</td>
+					  <td>{{rx.get('email')}}</td>
+					  <td>
+						  <form >
+						  <button class="ui red circular mini button" type="submit" formaction="/admin/dbid/{{rx.get('bid')}}" formmethod="get">X</button>
+						  <button class="ui green circular mini button" type="submit" formaction="/admin/check/publish/{{rx.get('bid')}}" formmethod="get">O</button>
+					  </td>
+				  </tr>
+				  {% endif %}
+				  {% endfor %}
+
+			  </tbody>
+		  </table>
+		  <div class="ui divider"></div>
+	  	  <a class="ui left black ribbon label">
+		  已付款訂單
+	  	  </a>
+		  <table class="ui celled table">
+			  <thead>
+				  <tr>
+					  <th>Bid</th>
+					  <th>時間</th>
+					  <th>誰</th>
+				  	  <th>電郵</th>
+				  	  <th>金額</th>
+				  	  <th>付款方式</th>
+		  		  </tr>
+			  </thead>
+			  <tbody class="poptrox">
+				  {% for bill in bill:%}
+				  <tr class="positive">
+						  <td>{{bill.get('bid')}}</td>
+						  <td>{{bill.get('date').strftime("%m-%d %H:%M")}}</td>
+					  <td>{{bill.get('name')}}</td>
+					  <td>{{bill.get('email')}}</td>
+					  <td>{{bill.get('bill')}}</td>
+					  {% if 'full' in bill.get('bidmethod'):%}
+					  <td>全額</td>
+					  {% else :%}
+					  <td>訂金</td>
+					  {% endif %}
+				  </tr>
+				  {% endfor %}
+			  </tbody>
+		  </table>
+		  <div class="ui divider"></div>
+
+<script>
+$( document ).ready(function() {
+var foo = $('.poptrox');
+foo.poptrox();
+});
+</script>
+{% endblock %}

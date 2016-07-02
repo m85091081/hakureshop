@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% block head %}
+    <meta charset='utf-8' />
+	<link rel="stylesheet" type="text/css" media="screen" href= "../static/css/semantic.css">
+	<link rel="stylesheet" href="../static/css/font-awesome.min.css">
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+	<title>{% block title %}{% endblock %} - 羽天珼岸 HakureiWings</title>
+	{% endblock %}  
+</head>
+<body style="height:100%;">
+	<div class= "ui container" style="padding-top:2%;">
+	<div class ="ui grid">
+			<div class="four wide column">
+				<a href="/">
+				<img src="/static/img/wind.png" style="width:92%; padding-right:1%; padding-left:2%;">
+				</a>
+				<div style="padding-top:10%;" >
+<div class="ui pointing vertical menu" style="width:90%;" >
+
+	<a class="item {% block index %}{% endblock %}" href="/" style="pading:4px;">
+	  <h4><i style="padding-right:4px;" class="fa fa-home"></i>回首頁</h4>
+  </a>
+  <a class="item {% block contact %}{% endblock %}" href="/logout">
+	  <i style="padding-right:5px;"  class="fa fa-envelope-o"></i> 登出
+  </a>
+  <div class="item">
+  </div>
+</div>
+				</div>
+			</div>
+			<div class ="twelve wide column">
+				<div style="padding-top:2%;" >
+			{% block content %}{% endblock %}
+			</div>
+		</div>
+	</div>
+	<div class="ui horizontal divider " style="padding-top:3%; width:100%;">
+		<i class="fa fa-copyright"></i>羽天珼岸.HakureiWing / CMS:0Mu-Project / hakurei.club
+	</div>
+	</div>
+	  	<script src="../static/js/jquery.min.js"></script>
+		<script src="../static/js/semantic.js"></script>
+		<script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+		{% block script %}
+		{% endblock %}
+</body>
+</html>

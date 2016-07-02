@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% block head %}
+    <meta charset='utf-8' />
+	<link rel="stylesheet" type="text/css" media="screen" href= "/static/semantic-ui/semantic.min.css">
+	<link rel="stylesheet" href="/static/css/font-awesome.min.css">
+	<title>{% block title %}{% endblock %} - 羽天珼岸 HakureiWings</title>
+	{% endblock %}  
+</head>
+<body style="height:100%;">
+	<div class= "ui container" style="padding-top:2%;">
+	<div class ="ui grid">
+			<div class="four wide column">
+				<a href="/">
+				<img src="/static/img/wind.png" style="width:92%; padding-right:1%; padding-left:2%;">
+				</a>
+				<div style="padding-top:10%;" >
+<div class="ui pointing vertical menu" style="width:90%;" >
+
+	<a class="item {% block index %}{% endblock %}" href="/" style="pading:1px;">
+	  <h4><i style="padding-right:4px;" class="fa fa-home"></i>  羽天珼岸 HakureiWing </h4>
+  </a>
+  <a class="item {% block blog %}{% endblock %}" href="https://hakurei.club/blog">
+	 <i style="padding-right:5px;"  class="fa fa-comments"></i> 躲雨閒聊 /..Blog
+  </a>
+  <a class="item {% block fb %}{% endblock %}" href="https://www.facebook.com/HakureiWing/">
+	  <i style="padding-right:8px;"  class="fa fa-facebook-official"></i> 轉移陣地 /..Facebook
+  </a>
+  <a class="item {% block card %}{% endblock %}" href="/shop">
+	  <i style="padding-right:5px;"  class="fa fa-picture-o"></i> 商品型錄 /..WingShop
+  </a>
+  <a class="item {% block contact %}{% endblock %}" href="mailto:contact@hakurei.club">
+	  <i style="padding-right:5px;"  class="fa fa-envelope-o"></i> 買把傘吧 /..Contact
+  </a>
+  <div class="item">
+  </div>
+</div>
+<br>
+				</div>
+			</div>
+			<div class ="twelve wide column">
+				<div style="padding-top:2%;" >
+			{% block content %}{% endblock %}
+			</div>
+		</div>
+	</div>
+	<div class="ui horizontal divider " style="padding-top:3%; width:100%;">
+		<i class="fa fa-copyright"></i>羽天珼岸.HakureiWing / CMS:0Mu-Project / hakurei.club
+	</div>
+	</div>
+	  	<script src="/static/js/jquery.min.js"></script>
+		<script src="/static/semantic-ui/semantic.js"></script>
+		{% block script %}
+		{% endblock %}
+</body>
+</html>

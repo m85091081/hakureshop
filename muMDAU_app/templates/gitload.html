@@ -1,0 +1,27 @@
+{% extends "nbase.html" %}
+{% block title %}Github Check{% endblock%}
+{% block content %}
+<div>
+<img style="display:block; margin:auto;" src="/static/img/hana004.jpg" width="70%" height"70%"></img>						  </div>
+<div class="ui active inverted dimmer">
+<div class="ui text loader">正在抓取 GitHub Repo 更新</div>
+</div>
+{% endblock %}
+{% block script %}
+	  <script>
+		  $(document).ready(function(){
+			  $("#load").hide(); 
+			  $("#logging").hide();
+			  $.ajax({
+				  type: "POST",
+				  url: "/admin",
+				  dataType: "html",
+				  success: function(){
+					  window.location.href='/admin/panel'
+				  },
+				  error: function(){ alert("failure");}
+			  });
+
+		  });
+		  </script>	
+{% endblock %}

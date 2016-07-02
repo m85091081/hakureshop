@@ -1,0 +1,74 @@
+{% extends "nshopbase.html"%}
+{% block title %}Shop{% endblock %}
+{% block card %}
+active
+{% endblock %}
+{% block text %}
+<h3 class="ui horizontal divider header">
+Hakurei Shop 羽天珼岸購買系統
+</h3>
+<h4 align="center"> 系統暫存單號 - {{bid}}</h4>
+<table class="ui celled padded table">
+	<thead>
+		<tr>
+			<th>購買物品</th>
+			<th>單價</th>
+			<th>數量</th>
+			<th>總價</th>
+		</tr>
+	</thead>
+	<tbody>
+		{%for f in fitem%}
+		<tr>
+			<td>{{itemdata(f).get('name')}}</td>
+			<td>{{itemdata(f).get('cost')}}</td>
+			<td>{{fitem[f]}}</td>
+			<td>{{itemdata(f).get('cost')|int * fitem[f]|int}}</td>
+		</tr>
+		{%endfor%}
+	</tbody>
+</table>
+<form class="ui form">
+				  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+   	<div class="field">
+	  <div class="two fields">
+		  <div class="field">
+			  <input name="name" placeholder="購買人" type="text">
+		  </div>
+		  <div class="field">
+			  <input name="tele" placeholder="聯絡電話" type="text">
+		  </div>
+		  <div class="field">
+			  <input name="email" placeholder="聯絡信箱" type="text">
+		  </div>
+	  </div>
+	  <div class="field">
+		  <input name="address" placeholder="填寫地址" type="text">
+	  </div>
+  </div>
+	<div class="ui icon large message">
+		
+		<i class="ui huge icons " style="padding-right:20px;"><i class="large payment grey icon"></i></i>
+		<div class="content">
+			<div class="header">		
+				本系統採用歐付保 AllPay 金流串流機制
+			</div>
+			<br/>1.如要購買，請填寫上方聯絡資訊，再點擊"全額付款"，出貨時會以Email通知。
+			<br/>2.如要繼續購買請點擊"繼續購買"按鈕，系統將引導你繼續購買。
+			</p>
+		<div class ="ui divider"></div>
+			<div  class="ui right floated buttons">
+				<button class="blue  ui button"  type="submit" formmethod="post" formaction="/bid/gen/full/{{bid}}">
+					全額付款
+				</button>
+				<div class='or'></div>
+				<div class="green ui button" onclick="location.href='/'">
+					繼續購買
+				</button>
+			</div>
+		</div>
+	</div>
+</form>
+{% endblock %}
+{% block script %}
+{% endblock %}

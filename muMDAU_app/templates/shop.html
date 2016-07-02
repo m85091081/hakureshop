@@ -1,0 +1,54 @@
+{% extends "nshopbase.html"%}
+{% block title %}Shop{% endblock %}
+{% block card %}
+active
+{% endblock %}
+{% block text %}
+<h3 class="ui horizontal divider header">
+Hakurei Shop 羽天珼岸購買系統
+</h3>
+<div class="ui icon small message" style="padding-top:6px; padding-bottom:6px;">
+	<i class="ui tiny icons " style="padding-right:20px;"><i class="tiny payment grey icon"></i></i>
+		<div class="content">
+			<button class="ui right floated tiny blue button" onclick="location.href='/find'">訂單查詢/付款</button>
+		</div>
+	</div>
+<h4 class="ui horizontal divider header">
+販售商品
+</h4>
+<div class="ui divided items">
+{% for item in item %}
+  <div class="item">
+	  <div class="image">
+		  <img src="{{item['img']}}">
+	  </div>
+	  <div class="content">
+		  <a class="header">{{item['name']}}</a>
+		  <div class="meta">
+			  <span class="artist">畫師:{{item['artist']}}</span>
+		  </div>
+		  <div class="description">
+			  <p>描述:{{item['des']}}</p>
+			  <p>剩餘數量:{{item['count']}}</p>
+			  <p>價格:{{item['cost']}}</p>
+		  </div>
+		  <div class="extra">
+			  <div class="ui label">{{item['tag']}}</div>
+			  <form >
+				  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+			  <div class="ui small  right floated input" style="width:55px;">
+				    <input name = "many" placeholder="數量" type="text">
+			  </div>
+			  <button class="ui right floated primary button" type="submit" formaction="/buy/{{item['_id']}}" formmethod="post">
+				  加到訂單
+			  </button> 
+			  </form>
+		  </div>
+	  </div>
+  </div>
+{% endfor %}
+<div class="ui divider"></div>
+</div>
+{% endblock %}
+{% block script %}
+{% endblock %}

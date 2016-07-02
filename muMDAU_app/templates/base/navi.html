@@ -1,0 +1,16 @@
+{% extends "base/base.html" %} 
+
+{% block mainBlock %}
+<div class="ui container" id="MainFrame">
+	<div class="ui pointing menu" id="navibar">
+			<a href="/admin" class="header item">
+				<!--img class="logo" src=""-->
+						System Ver 1.0
+			</a>
+			<a class="item {% block naviwantClass %}{%endblock%}" href="/admin">訂單系統</a>
+			<a class="right item {% block  naviaccClass %}{%endblock%}" href="/user">使用者: ({{ session['username'] }}) </a>
+			<a class="item" href="/logout">登出</a>
+	</div>
+	{% block mainContentArea %}{% endblock %}
+	</div>
+{% endblock %}

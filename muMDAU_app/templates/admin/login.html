@@ -1,0 +1,73 @@
+{% extends "base/base.html" %}
+{% block title %}Login Panel{% endblock%}
+{% block header %}
+<style>
+
+body {
+	background-image :url('/static/login.png');
+	background-repeat: no-repeat;
+	background-position: right bottom;
+}
+body > .grid {
+	height: 100%;
+}
+    .image {
+      margin-top: -100px;
+      }
+	.column {
+					      max-width: 450px;
+							      }
+				  
+</style>
+{% endblock%}
+{% block mainBlock %}
+<script>
+$(document).ready(function(){
+$('.forget.modal')
+.modal({
+ blurring: true
+ })
+ .modal('attach events', '.forget.button', 'show')
+ ;
+});
+</script>
+<div class = "ui middle aligned grid">
+	<div class = "column center aligned" style ="left:5%; width:380px;">
+		<h3 class = "ui header"><div class = "content">後端系統登入</div></h3>
+	<form class="ui large form" method="post" action="/login">
+		    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+		<div class = "ui stacked segment" style="background-color: rgba(255,255,255,0.5);">
+			<div class = "field">
+			<div class = "ui left icon input">
+				<i class = "user icon"></i>
+				<input type="text" name="buser"  class="form-control" placeholder="輸入使用者帳號"></input>
+			</div>
+			</div>
+		
+			<div class = "field">
+			<div class = "ui left icon input">
+				<i class = "lock icon"></i>
+				<input type="password" name="bpass" class="form-control" placeholder="請輸入密碼"></input>
+			</div>
+			</div>
+
+<div class="ui small forget modal">
+  <div class="header">忘記密碼了嗎？</div>
+  <div class="content">
+	  <p>請聯絡社團總管:楊順凱<p>
+	  <a href="https://www.facebook.com/ismylofe?fref=ts">https://m.me/ismylofe</a>
+
+  </div>
+</div>
+			<div class="ui fluid buttons">
+		  		<div class="ui forget button">忘記密碼</div>
+				<div class="or"></div>
+			  	<button id="login" type="submit" class="ui positive button">登入系統</button>
+			</div>  
+		</div>
+	</form>		
+	</div>
+		</div>
+{% endblock%}
+{% block script %}
+{% endblock %}

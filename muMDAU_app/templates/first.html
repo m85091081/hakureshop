@@ -1,0 +1,28 @@
+{% extends "pbase.html" %}
+{% block title %}First Time{% endblock%}
+{% block text %}
+<a class="ui red right ribbon label">0MuMDAU 初次運作配置</a>
+<div style="padding:5%">
+		<form id="bck" class="createtable" method="post" action="/init">
+		    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+			</br>
+			<div class="ui labeled input">
+				<div class="ui label">User</div>
+				<input class="form-control" type="text" name="buser" size="20" placeholder="請牢記此帳號">
+			</div>
+			<br />
+			<br />
+			<div class="ui labeled input">
+				<div class="ui label">Pass</div>
+				<input class="form-control" type="password" name="bpass" size="20" placeholder="請輸入您密碼">
+			</div>
+			<br />
+			<br />
+				<button type="submit" id="login" class="ui right floated button">
+					進行初次設定
+				</button>
+			<br />
+		</form>		
+</div>
+{% endblock%}
+{% block script %}{% endblock %}

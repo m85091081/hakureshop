@@ -1,0 +1,62 @@
+{% extends "base/2row-base.html" %} 
+
+{% block naviIndexClass %}active{% endblock %}
+
+{% block title %}KPC - 超炫炮阿母斯特郎加農炮POS系統{% endblock %}
+{% block twonavi %}
+		<a class="active item">未確認訂單管理</a>
+		<a class="item">出機訂單管理</a>
+		<a class="item">歷他媽屎訂單</a>
+{% endblock %}
+{% block mainFrame %}
+<div class="sixteen wide  aligned column">
+	<h4>這筆訂單來自 {{name}} ({{bid}}), 以下是暫存送件，請業務於2天內確認訂單，並且開通付款</h4>
+		  <div class="ui divider"></div>
+		  <img src="{{url}}" width="100%"></img>
+		  <div class="ui divider"></div>
+		  <form class="ui form" method='POST' action='/save/db/{{bid}}'>
+		    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+		  <table id ="table1" class="ui celled compact  table">
+			  <thead>
+				  <tr>
+					  <th class="two wide">品項</th>
+					  <th class="ten wide">內容</th>
+					  <th class="one wide">數量</th>
+				  	  <th class="two wide">總價</th>
+		  		  </tr>
+			  </thead>
+			  <tbody>
+				  {%for x in dic%}
+				  {%if not '' in x.get('value') :%}
+				  {%for xx in range(x.get('value')|length // 3)%}
+				  <tr>
+					  <td>
+					  {{x.get('fname')}}
+					  </td>
+					  <td>
+						  {{x.get('value')[xx * 3 - 3]}}
+					  </td>
+					  <td>
+						  {{x.get('value')[xx*3 - 2]}}
+					  </td>
+					  <td>
+						  {{x.get('value')[xx*3 - 1]}}
+					  </td>
+				  </tr>
+				  {%endfor%}
+				  {%endif%}
+				  {%endfor%}
+			  </tbody>
+			  <tfoot>
+				  <th class="right aligned" colspan="3"></td>
+				  <th>{{u}}</td>
+			  </tfoot>
+		  </table>
+		  <div class="ui divider"></div>
+		    <div class="field">
+				<label>備註意見:(例如這個客人是王八單之類的)</label>
+				<textarea rows="4"></textarea>
+			</div>
+	</div>
+		  <div class="ui divider"></div>
+{% endblock %}

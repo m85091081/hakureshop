@@ -1,0 +1,72 @@
+{% extends "base/2row-base.html" %} 
+
+{% block naviIndexClass %}active{% endblock %}
+
+{% block title %}KPC - 超炫炮阿母斯特郎加農炮POS系統{% endblock %}
+{% block twonavi %}
+		<a class="active item">未確認訂單管理</a>
+		<a class="item">出機訂單管理</a>
+		<a class="item">歷他媽屎訂單</a>
+{% endblock %}
+{% block mainFrame %}
+<div class="sixteen wide  aligned column">
+	<h4>這筆訂單來自 {{name}} ({{bid}}), 以下是他的原價屋估價單</h4>
+		  <div class="ui divider"></div>
+		  <img src="{{url}}" width="100%"></img>
+		  <div class="ui divider"></div>
+		  <form class="ui form" method='POST' action='/admin/check/save/{{bid}}'>
+		    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+		  <table id ="table1" class="ui celled compact  table">
+			  <thead>
+				  <tr>
+					  <th class="one wide"></th>
+					  <th class="two wide">品項</th>
+					  <th class="night wide">內容</th>
+					  <th class="one wide">數量</th>
+				  	  <th class="two wide">總價</th>
+		  		  </tr>
+			  </thead>
+			  <tbody>
+				  {%for x in col%}
+				  <tr class="{{x.get('name')}}">
+					  <td><a href="javascript:AddAfter('{{x.get('name')}}','{{x.get('fname')}}')" ><i class="plus icon"></i></a></td>
+					  <td>{{x.get('fname')}}</td>
+					  <td><div class="ui fluid transparent input">
+							  <input placeholder="請輸入" type="text" name="{{x.get('name')}}[]">
+						  </div>
+					  </td>
+					  <td><div class="ui fluid transparent input">
+							  <input placeholder="數量" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" type="text" name="{{x.get('name')}}[]">
+						  </div>
+					  </td>
+					  <td><div class="ui fluid transparent input">
+							  <input placeholder="總價$" onkeyup="this.value=this.value.replace(/[^0-9]/g,'')" type="text" name="{{x.get('name')}}[]">
+						  </div>
+					  </td>
+				  {%endfor%}
+			  </tbody>
+		  </table>
+		  <div class="ui divider"></div>
+		    <div class="field">
+				<label>備註意見:(例如這個客人是王八單之類的)</label>
+				<textarea name="texta" type="text" rows="4"></textarea>
+			</div>
+			<button class="ui button" type="submit">暫存送件(不自動派發裝機)</button>
+</form>
+		  <div class="ui divider"></div>
+
+<script>
+$( document ).ready(function() {
+var foo = $('.poptrox');
+foo.poptrox();
+});
+var i = 1;
+function AddAfter(val,name){
+	$('.'+val+':last').after('<tr id="'+i+'"class ="'+ val +'">	<td><a href="javascript:delrow('+ i +')"><i class="minus icon"></i></a></td><td>'+name+'</td><td><div class="ui fluid transparent input"><input placeholder="請輸入" type="text" name="'+val+'[]"></div></td><td><div class="ui fluid transparent input"><input placeholder="數量" type="text" name="'+val+'[]"></div></td> <td><div class="ui fluid transparent input"> <input placeholder="總價$" name="'+val+'[]" type="text"></div></td></tr>');
+	i= i+1;
+}
+function delrow(row){
+	$('#'+row).remove();
+}
+</script>
+{% endblock %}

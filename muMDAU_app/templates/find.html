@@ -1,0 +1,24 @@
+{% extends "nshopbase.html"%}
+{% block title %}Shop{% endblock %}
+{% block card %}
+active
+{% endblock %}
+{% block text %}
+<h3 class="ui horizontal divider header">
+Hakurei Shop 羽天珼岸購買系統
+</h3>
+<form class="ui form" action="/find" method="post">
+	<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+	<div class="ui  fluid big labeled input">
+		<div class="ui label">
+			訂單編號
+		</div>
+		<input placeholder="訂單編號" type="text" name="bid">
+	</div>
+	<div class="ui divider"></div>
+	<div align='right'>
+		<button class="ui massive red button" type="submit">查詢訂單</button>
+	</div>
+{% endblock %}
+{% block script %}
+{% endblock %}
