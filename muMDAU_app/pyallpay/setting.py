@@ -7,5 +7,5 @@ HASH_KEY = '5294y06JbISpM5x9'
 HASH_IV = 'v77hoKGq4kWxNNIS'
 
 RETURN_URL = 'http://docker-dev.dd-han.tw/bid/server/csrf'
-CLIENT_BACK_URL = 'http://docker-dev.dd-han.tw'
-PAYMENT_INFO_URL = 'http://docker-dev.dd-han.tw'
+CLIENT_BACK_URL = 'http://docker-dev.dd-han.tw/bid/result'
+PAYMENT_INFO_URL = ''

@@ -24,6 +24,13 @@ def server():
                 return '1|OK'
         return '0|no allpay'
 
+@csrf.exempt
+@bid.route('/result',methods=['POST'])
+def resallfuck():
+    response = make_response(render_template('orderresult.html'))
+    response.set_cookie('bid','',expires=0)
+    return response
+
 @bid.route('/gen/full/<bid>',methods=['POST'])
 def allfuck(bid):
     name = request.form['name']
