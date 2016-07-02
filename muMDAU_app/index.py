@@ -19,6 +19,8 @@ def index():
 def buyit(itmid):
     item = Item.finddata(itmid)
     many = request.form['many']
+    if many == "" :
+        many = int(1)
     if int(many) <= item.get('count'):
         return render_template('buy.html',**locals())
     else:
